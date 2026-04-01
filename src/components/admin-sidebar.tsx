@@ -24,6 +24,8 @@ export function AdminSidebar({ userName }: { userName: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const initial = userName.charAt(0).toUpperCase();
+
   return (
     <>
       {/* Mobile toggle */}
@@ -50,7 +52,9 @@ export function AdminSidebar({ userName }: { userName: string }) {
         )}
       >
         <div className="flex items-center justify-between border-b border-foreground/10 px-6 py-4">
-          <h2 className="text-lg font-semibold">Portfolio Admin</h2>
+          <h2 className="text-lg font-bold tracking-tight bg-gradient-to-r from-foreground via-purple-600 to-cyan-500 dark:from-foreground dark:via-purple-400 dark:to-cyan-400 bg-clip-text text-transparent">
+            Adyuta.
+          </h2>
           <button onClick={() => setOpen(false)} className="lg:hidden">
             <X className="h-5 w-5" />
           </button>
@@ -65,13 +69,16 @@ export function AdminSidebar({ userName }: { userName: string }) {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
                   isActive
-                    ? "bg-foreground/10 text-foreground"
+                    ? "bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300"
                     : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
                 )}
               >
-                <item.icon className="h-4 w-4" />
+                {isActive && (
+                  <div className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full bg-gradient-to-b from-purple-500 to-cyan-400" />
+                )}
+                <item.icon className={cn("h-4 w-4", isActive && "text-purple-500")} />
                 {item.label}
               </Link>
             );
@@ -79,13 +86,18 @@ export function AdminSidebar({ userName }: { userName: string }) {
         </nav>
 
         <div className="border-t border-foreground/10 px-3 py-4">
-          <p className="mb-3 truncate px-3 text-sm text-foreground/60">
-            {userName}
-          </p>
+          <div className="mb-3 flex items-center gap-3 px-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 text-xs font-bold text-white">
+              {initial}
+            </div>
+            <p className="truncate text-sm text-foreground/70 font-medium">
+              {userName}
+            </p>
+          </div>
           <form action={signOut}>
             <button
               type="submit"
-              className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-foreground/60 transition-colors hover:bg-foreground/5 hover:text-foreground"
+              className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-foreground/60 transition-colors hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400"
             >
               <LogOut className="h-4 w-4" />
               Sign Out

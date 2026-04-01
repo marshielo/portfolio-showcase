@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Trophy } from "lucide-react";
 
 interface AboutSectionProps {
   bio?: string;
@@ -69,8 +70,11 @@ export function AboutSection({
   const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
-  const defaultBio =
-    "Performance-driven Software Engineer with experience in digital platform architecture and process automation. I specialize in building scalable REST APIs and modern web interfaces using Go and Next.js, with expertise in AI-driven solutions, Microservices, and event-driven architectures. Based in Jakarta, available globally for remote work.";
+  const defaultBio = (
+    <>
+      Performance-driven <strong className="text-foreground/90">Software Engineer</strong> with experience in digital platform <strong className="text-foreground/90">architecture</strong> and process automation. I specialize in building <strong className="text-foreground/90">scalable REST APIs</strong> and modern web interfaces using <strong className="text-foreground/90">Go</strong> and <strong className="text-foreground/90">Next.js</strong>, with expertise in <strong className="text-foreground/90">AI-driven solutions</strong>, Microservices, and event-driven architectures. Based in Jakarta, available globally for remote work.
+    </>
+  );
 
   const defaultEducation = {
     school: "Universitas Islam Indonesia",
@@ -88,12 +92,8 @@ export function AboutSection({
         className="mx-auto max-w-5xl px-4"
       >
         <div className="mb-12 text-center">
-          <p className="text-sm uppercase tracking-widest text-foreground/40 mb-2">
-            About Me
-          </p>
-          <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">
-            Who I Am
-          </h2>
+          <h2 className="text-sm uppercase tracking-widest text-foreground/40 mb-2">
+            About Me</h2>
         </div>
 
         <div className="grid gap-10 md:grid-cols-5">
@@ -122,13 +122,13 @@ export function AboutSection({
               <p className="text-xs uppercase tracking-widest text-foreground/40 mb-3">
                 Awards & Recognition
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {awards.map((award, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-2 text-sm text-foreground/60"
+                    className="flex items-start gap-2.5 text-sm text-foreground/60"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400" />
+                    <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                     {award}
                   </li>
                 ))}
@@ -171,7 +171,7 @@ export function AboutSection({
                 return (
                   <span
                     key={skill}
-                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${color.border} ${color.bg} ${color.text}`}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-all cursor-default hover:scale-105 ${color.border} ${color.bg} ${color.text}`}
                   >
                     {skill}
                   </span>
