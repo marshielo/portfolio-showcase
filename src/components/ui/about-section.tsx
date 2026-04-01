@@ -16,6 +16,14 @@ interface AboutSectionProps {
   linkedinUrl?: string;
 }
 
+const SKILL_COLORS = [
+  { border: "border-purple-400/30 dark:border-purple-400/20", text: "text-purple-700 dark:text-purple-300", bg: "bg-purple-50 dark:bg-purple-500/10" },
+  { border: "border-cyan-400/30 dark:border-cyan-400/20", text: "text-cyan-700 dark:text-cyan-300", bg: "bg-cyan-50 dark:bg-cyan-500/10" },
+  { border: "border-orange-400/30 dark:border-orange-400/20", text: "text-orange-700 dark:text-orange-300", bg: "bg-orange-50 dark:bg-orange-500/10" },
+  { border: "border-blue-400/30 dark:border-blue-400/20", text: "text-blue-700 dark:text-blue-300", bg: "bg-blue-50 dark:bg-blue-500/10" },
+  { border: "border-rose-400/30 dark:border-rose-400/20", text: "text-rose-700 dark:text-rose-300", bg: "bg-rose-50 dark:bg-rose-500/10" },
+];
+
 const DEFAULT_SKILLS = [
   "Go",
   "Next.js",
@@ -96,7 +104,8 @@ export function AboutSection({
             </p>
 
             {/* Education */}
-            <div className="rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 p-5">
+            <div className="relative rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 p-5 overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full bg-gradient-to-b from-purple-500 via-cyan-400 to-orange-400" />
               <p className="text-xs uppercase tracking-widest text-foreground/40 mb-3">
                 Education
               </p>
@@ -119,7 +128,7 @@ export function AboutSection({
                     key={i}
                     className="flex items-start gap-2 text-sm text-foreground/60"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-700/60 dark:bg-amber-500/50" />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400" />
                     {award}
                   </li>
                 ))}
@@ -131,7 +140,7 @@ export function AboutSection({
                 href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-amber-700 dark:text-amber-500/80 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-medium bg-gradient-to-r from-purple-600 to-cyan-500 dark:from-purple-400 dark:to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
               >
                 View full profile on LinkedIn
                 <svg
@@ -157,14 +166,17 @@ export function AboutSection({
               Tech Stack
             </p>
             <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/5 px-3 py-1.5 text-xs text-foreground/70"
-                >
-                  {skill}
-                </span>
-              ))}
+              {skills.map((skill, i) => {
+                const color = SKILL_COLORS[i % SKILL_COLORS.length];
+                return (
+                  <span
+                    key={skill}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${color.border} ${color.bg} ${color.text}`}
+                  >
+                    {skill}
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>

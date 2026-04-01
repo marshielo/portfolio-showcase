@@ -55,9 +55,18 @@ export default async function Home() {
         </section>
       )}
 
+      {/* Gradient divider */}
+      <div className="mx-auto max-w-3xl h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+
       <AboutSection linkedinUrl="https://linkedin.com/in/adyutaindra" />
 
+      {/* Gradient divider */}
+      <div className="mx-auto max-w-3xl h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+
       <ExperienceSection />
+
+      {/* Gradient divider */}
+      <div className="mx-auto max-w-3xl h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
 
       <BentoGridSection email={profile?.email} />
 
