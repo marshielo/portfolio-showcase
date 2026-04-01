@@ -6,6 +6,7 @@ import { AboutSection } from "@/components/ui/about-section";
 import { ExperienceSection } from "@/components/ui/experience-section";
 import { BentoGridSection } from "@/components/ui/bento-grid-section";
 import { ContactFooter } from "@/components/ui/contact-footer";
+import { ServicesCarousel } from "@/components/ui/services-carousel";
 import { PortfolioNavbar } from "@/components/portfolio-navbar";
 
 export default async function Home() {
@@ -67,6 +68,11 @@ export default async function Home() {
 
       {/* Gradient divider */}
       <div className="mx-auto max-w-3xl h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
+
+      <ServicesCarousel />
+
+      {/* Gradient divider */}
+      <div className="mx-auto max-w-3xl h-px bg-gradient-to-r from-transparent via-rose-500/20 to-transparent" />
 
       <BentoGridSection email={profile?.email} />
 
