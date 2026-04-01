@@ -28,7 +28,7 @@ export default async function PortfoliosPage() {
         </div>
         <Link
           href="/admin/portfolios/new"
-          className="inline-flex items-center gap-2 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-lg hover:shadow-purple-500/20"
         >
           <Plus className="h-4 w-4" />
           Add New

@@ -29,6 +29,10 @@ export function HeroSection({
           transition={{ delay: 0.1, duration: 0.6 }}
           className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-white/10 bg-neutral-100/80 dark:bg-white/5 px-4 py-1.5 text-sm text-foreground/60 backdrop-blur-sm transition-colors hover:bg-neutral-200/80 dark:hover:bg-white/10"
         >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
           Available for Remote Work
           <span className="ml-1">&rarr;</span>
         </motion.a>
@@ -73,7 +77,7 @@ export function HeroSection({
         >
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-white/15 bg-white dark:bg-white px-6 py-3 text-sm font-medium text-black transition-all hover:bg-neutral-100 dark:hover:bg-white/90"
+            className="inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-white/15 bg-white dark:bg-white px-6 py-3 text-sm font-medium text-black transition-all hover:bg-neutral-100 dark:hover:bg-white/90 hover:-translate-y-0.5 hover:shadow-lg"
           >
             View Projects
             <ArrowDown className="h-4 w-4" />
@@ -81,7 +85,7 @@ export function HeroSection({
           {email && (
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-white/15 bg-neutral-100/80 dark:bg-white/5 px-6 py-3 text-sm font-medium text-foreground backdrop-blur-sm transition-all hover:bg-neutral-200/80 dark:hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-white/15 bg-neutral-100/80 dark:bg-white/5 px-6 py-3 text-sm font-medium text-foreground backdrop-blur-sm transition-all hover:bg-neutral-200/80 dark:hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-lg"
             >
               Get in Touch
             </a>

@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Trophy } from "lucide-react";
 
 interface AboutSectionProps {
   bio?: string;
@@ -15,6 +16,14 @@ interface AboutSectionProps {
   awards?: string[];
   linkedinUrl?: string;
 }
+
+const SKILL_COLORS = [
+  { border: "border-purple-400/30 dark:border-purple-400/20", text: "text-purple-700 dark:text-purple-300", bg: "bg-purple-50 dark:bg-purple-500/10" },
+  { border: "border-cyan-400/30 dark:border-cyan-400/20", text: "text-cyan-700 dark:text-cyan-300", bg: "bg-cyan-50 dark:bg-cyan-500/10" },
+  { border: "border-orange-400/30 dark:border-orange-400/20", text: "text-orange-700 dark:text-orange-300", bg: "bg-orange-50 dark:bg-orange-500/10" },
+  { border: "border-blue-400/30 dark:border-blue-400/20", text: "text-blue-700 dark:text-blue-300", bg: "bg-blue-50 dark:bg-blue-500/10" },
+  { border: "border-rose-400/30 dark:border-rose-400/20", text: "text-rose-700 dark:text-rose-300", bg: "bg-rose-50 dark:bg-rose-500/10" },
+];
 
 const DEFAULT_SKILLS = [
   "Go",
@@ -61,8 +70,11 @@ export function AboutSection({
   const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
-  const defaultBio =
-    "Performance-driven Software Engineer with experience in digital platform architecture and process automation. I specialize in building scalable REST APIs and modern web interfaces using Go and Next.js, with expertise in AI-driven solutions, Microservices, and event-driven architectures. Based in Jakarta, available globally for remote work.";
+  const defaultBio = (
+    <>
+      Performance-driven <strong className="text-foreground/90">Software Engineer</strong> with experience in digital platform <strong className="text-foreground/90">architecture</strong> and process automation. I specialize in building <strong className="text-foreground/90">scalable REST APIs</strong> and modern web interfaces using <strong className="text-foreground/90">Go</strong> and <strong className="text-foreground/90">Next.js</strong>, with expertise in <strong className="text-foreground/90">AI-driven solutions</strong>, Microservices, and event-driven architectures. Based in Jakarta, available globally for remote work.
+    </>
+  );
 
   const defaultEducation = {
     school: "Universitas Islam Indonesia",
@@ -80,12 +92,8 @@ export function AboutSection({
         className="mx-auto max-w-5xl px-4"
       >
         <div className="mb-12 text-center">
-          <p className="text-sm uppercase tracking-widest text-foreground/40 mb-2">
-            About Me
-          </p>
-          <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">
-            Who I Am
-          </h2>
+          <h2 className="text-sm uppercase tracking-widest text-foreground/40 mb-2">
+            About Me</h2>
         </div>
 
         <div className="grid gap-10 md:grid-cols-5">
@@ -96,7 +104,8 @@ export function AboutSection({
             </p>
 
             {/* Education */}
-            <div className="rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 p-5">
+            <div className="relative rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 p-5 overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full bg-gradient-to-b from-purple-500 via-cyan-400 to-orange-400" />
               <p className="text-xs uppercase tracking-widest text-foreground/40 mb-3">
                 Education
               </p>
@@ -113,13 +122,13 @@ export function AboutSection({
               <p className="text-xs uppercase tracking-widest text-foreground/40 mb-3">
                 Awards & Recognition
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {awards.map((award, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-2 text-sm text-foreground/60"
+                    className="flex items-start gap-2.5 text-sm text-foreground/60"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-700/60 dark:bg-amber-500/50" />
+                    <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                     {award}
                   </li>
                 ))}
@@ -131,7 +140,7 @@ export function AboutSection({
                 href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-amber-700 dark:text-amber-500/80 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-medium bg-gradient-to-r from-purple-600 to-cyan-500 dark:from-purple-400 dark:to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
               >
                 View full profile on LinkedIn
                 <svg
@@ -157,14 +166,17 @@ export function AboutSection({
               Tech Stack
             </p>
             <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/5 px-3 py-1.5 text-xs text-foreground/70"
-                >
-                  {skill}
-                </span>
-              ))}
+              {skills.map((skill, i) => {
+                const color = SKILL_COLORS[i % SKILL_COLORS.length];
+                return (
+                  <span
+                    key={skill}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-all cursor-default hover:scale-105 ${color.border} ${color.bg} ${color.text}`}
+                  >
+                    {skill}
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>

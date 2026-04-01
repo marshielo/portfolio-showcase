@@ -15,6 +15,14 @@ interface ExperienceSectionProps {
   experiences?: ExperienceItem[];
 }
 
+const ROLE_COLORS = [
+  { dot: "from-purple-500 to-purple-400", border: "border-purple-500/40", text: "text-purple-600 dark:text-purple-400", glow: "group-hover:shadow-purple-500/10" },
+  { dot: "from-cyan-500 to-cyan-400", border: "border-cyan-500/40", text: "text-cyan-600 dark:text-cyan-400", glow: "group-hover:shadow-cyan-500/10" },
+  { dot: "from-orange-500 to-orange-400", border: "border-orange-500/40", text: "text-orange-600 dark:text-orange-400", glow: "group-hover:shadow-orange-500/10" },
+  { dot: "from-blue-500 to-blue-400", border: "border-blue-500/40", text: "text-blue-600 dark:text-blue-400", glow: "group-hover:shadow-blue-500/10" },
+  { dot: "from-rose-500 to-rose-400", border: "border-rose-500/40", text: "text-rose-600 dark:text-rose-400", glow: "group-hover:shadow-rose-500/10" },
+];
+
 const DEFAULT_EXPERIENCES: ExperienceItem[] = [
   {
     company: "CIMB Niaga",
@@ -93,10 +101,10 @@ export function ExperienceSection({
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 top-2 bottom-2 w-px bg-neutral-200 dark:bg-white/10 md:left-1/2 md:-translate-x-px" />
+          <div className="absolute left-4 top-2 bottom-2 w-px md:left-1/2 md:-translate-x-px bg-gradient-to-b from-purple-500/40 via-cyan-400/40 to-orange-400/40" />
 
           {experiences.map((exp, i) => (
-            <TimelineItem key={i} item={exp} index={i} />
+            <TimelineItem key={i} item={exp} index={i} colorIndex={i} />
           ))}
         </div>
       </motion.div>
@@ -104,30 +112,29 @@ export function ExperienceSection({
   );
 }
 
-function TimelineItem({ item, index }: { item: ExperienceItem; index: number }) {
+function TimelineItem({ item, index, colorIndex }: { item: ExperienceItem; index: number; colorIndex: number }) {
   const isEven = index % 2 === 0;
+  const color = ROLE_COLORS[colorIndex % ROLE_COLORS.length];
 
   return (
     <div
-      className={`relative mb-10 last:mb-0 pl-10 md:pl-0 md:w-1/2 ${
-        isEven ? "md:pr-10 md:ml-0" : "md:pl-10 md:ml-auto"
-      }`}
+      className={`group relative mb-10 last:mb-0 pl-10 md:pl-0 md:w-1/2 ${isEven ? "md:pr-10 md:ml-0" : "md:pl-10 md:ml-auto"
+        }`}
     >
       {/* Dot */}
       <div
-        className={`absolute top-2 left-2.5 h-3 w-3 rounded-full border-2 border-amber-700/60 dark:border-amber-600/50 bg-background md:left-auto ${
-          isEven ? "md:-right-1.5" : "md:-left-1.5"
-        }`}
+        className={`absolute top-2 left-2.5 h-3 w-3 rounded-full bg-gradient-to-br ${color.dot} border-2 border-background md:left-auto ${isEven ? "md:-right-1.5" : "md:-left-1.5"
+          }`}
       />
 
       {/* Card */}
-      <div className="rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/[0.03] p-5">
+      <div className={`rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/[0.03] p-5 transition-shadow duration-300 group-hover:shadow-lg ${color.glow}`}>
         <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
           <div>
             <h3 className="font-semibold text-foreground/90 text-sm sm:text-base">
               {item.role}
             </h3>
-            <p className="text-sm text-amber-700 dark:text-amber-500/80">{item.company}</p>
+            <p className={`text-sm font-medium ${color.text}`}>{item.company}</p>
           </div>
           <div className="text-right">
             <p className="text-xs text-foreground/40">{item.period}</p>
@@ -142,7 +149,7 @@ function TimelineItem({ item, index }: { item: ExperienceItem; index: number }) 
                 key={j}
                 className="flex items-start gap-2 text-xs sm:text-sm text-foreground/60"
               >
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground/20" />
+                <span className={`mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gradient-to-br ${color.dot}`} />
                 {h}
               </li>
             ))}

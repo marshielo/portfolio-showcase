@@ -56,7 +56,7 @@ export function PortfolioForm({
           type="text"
           required
           defaultValue={portfolio?.title}
-          className="w-full rounded-lg border border-foreground/20 bg-background px-3 py-2 text-sm outline-none focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+          className="w-full rounded-xl border border-foreground/20 bg-background px-4 py-2.5 text-sm outline-none transition-all focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20"
           placeholder="e.g. iOS Health Tracking App"
         />
       </div>
@@ -71,7 +71,7 @@ export function PortfolioForm({
           required
           rows={6}
           defaultValue={portfolio?.description}
-          className="w-full rounded-lg border border-foreground/20 bg-background px-3 py-2 text-sm outline-none focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+          className="w-full rounded-xl border border-foreground/20 bg-background px-4 py-2.5 text-sm outline-none transition-all focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20"
           placeholder="Write down your concept description that demonstrates comprehensive reasoning..."
         />
       </div>
@@ -92,7 +92,7 @@ export function PortfolioForm({
             min={2000}
             max={2099}
             defaultValue={portfolio?.year_accomplished ?? new Date().getFullYear()}
-            className="w-full rounded-lg border border-foreground/20 bg-background px-3 py-2 text-sm outline-none focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+            className="w-full rounded-xl border border-foreground/20 bg-background px-4 py-2.5 text-sm outline-none transition-all focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20"
           />
         </div>
 
@@ -109,7 +109,7 @@ export function PortfolioForm({
             type="text"
             required
             defaultValue={portfolio?.role_position}
-            className="w-full rounded-lg border border-foreground/20 bg-background px-3 py-2 text-sm outline-none focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+            className="w-full rounded-xl border border-foreground/20 bg-background px-4 py-2.5 text-sm outline-none transition-all focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20"
             placeholder="e.g. iOS Developer"
           />
         </div>
@@ -127,7 +127,7 @@ export function PortfolioForm({
           name="publication_link"
           type="url"
           defaultValue={portfolio?.publication_link ?? ""}
-          className="w-full rounded-lg border border-foreground/20 bg-background px-3 py-2 text-sm outline-none focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+          className="w-full rounded-xl border border-foreground/20 bg-background px-4 py-2.5 text-sm outline-none transition-all focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20"
           placeholder="https://..."
         />
       </div>
@@ -143,7 +143,7 @@ export function PortfolioForm({
             type="number"
             min={0}
             defaultValue={portfolio?.sort_order ?? 0}
-            className="w-full rounded-lg border border-foreground/20 bg-background px-3 py-2 text-sm outline-none focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+            className="w-full rounded-xl border border-foreground/20 bg-background px-4 py-2.5 text-sm outline-none transition-all focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20"
           />
         </div>
 
@@ -161,17 +161,19 @@ export function PortfolioForm({
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="rounded-lg bg-foreground px-6 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
-      >
-        {isPending
-          ? "Saving..."
-          : isEditing
-            ? "Update Portfolio"
-            : "Create Portfolio"}
-      </button>
+      <div className="pt-6 border-t border-foreground/10">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 px-6 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-lg hover:shadow-purple-500/20 disabled:opacity-50"
+        >
+          {isPending
+            ? "Saving..."
+            : isEditing
+              ? "Update Portfolio"
+              : "Create Portfolio"}
+        </button>
+      </div>
     </form>
   );
 }

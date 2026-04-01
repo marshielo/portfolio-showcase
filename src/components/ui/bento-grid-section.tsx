@@ -13,6 +13,14 @@ const World = dynamic(
 
 // ─── Tech Stack Marquee Header ──────────────────────────────────────────────
 
+const PILL_COLORS = [
+  "border-purple-400/30 dark:border-purple-400/20 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300",
+  "border-cyan-400/30 dark:border-cyan-400/20 bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300",
+  "border-orange-400/30 dark:border-orange-400/20 bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-300",
+  "border-blue-400/30 dark:border-blue-400/20 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300",
+  "border-rose-400/30 dark:border-rose-400/20 bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300",
+];
+
 const STACK_ROWS = [
   ["Next.js", "React", "TypeScript", "Tailwind CSS", "Figma", "Supabase", "Swift", "SwiftUI"],
   ["Node.js", "PostgreSQL", "Prisma", "Vercel", "Git", "Docker", "REST API", "GraphQL"],
@@ -31,7 +39,7 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
         {doubled.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/5 px-4 py-2 text-sm text-foreground/70 whitespace-nowrap"
+            className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap ${PILL_COLORS[i % PILL_COLORS.length]}`}
           >
             {item}
           </span>
@@ -111,8 +119,10 @@ function GlobeHeader() {
 
 function CTAHeader() {
   return (
-    <div className="flex flex-1 w-full items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/10 to-blue-500/10 min-h-[6rem]">
-      <div className="h-20 w-20 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 border-2 border-white/20 dark:border-black/20 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-purple-500/25">
+    <div className="relative flex flex-1 w-full items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/10 to-blue-500/10 min-h-[6rem] overflow-hidden">
+      {/* Pulsing glow behind orb */}
+      <div className="absolute h-32 w-32 rounded-full bg-purple-500/20 blur-2xl animate-pulse" />
+      <div className="h-20 w-20 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 border-2 border-white/20 dark:border-black/20 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-purple-500/25 relative z-10">
         A
       </div>
     </div>
@@ -123,10 +133,12 @@ function CTAHeader() {
 
 function WhatYouGetHeader() {
   return (
-    <div className="flex flex-1 w-full items-end rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 p-4 min-h-[6rem]">
-      <div className="inline-flex items-center gap-3 rounded-xl border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/5 px-4 py-3">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
-          <svg className="h-4 w-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <div className="relative flex flex-1 w-full items-end rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 p-4 min-h-[6rem] overflow-hidden">
+      {/* Subtle ambient glow */}
+      <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-cyan-400/15 blur-2xl" />
+      <div className="inline-flex items-center gap-3 rounded-xl border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/5 px-4 py-3 relative z-10">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/30 to-purple-500/30">
+          <svg className="h-4 w-4 text-cyan-500 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
