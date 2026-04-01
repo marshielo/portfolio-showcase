@@ -62,9 +62,9 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible }
-            )
+            child as React.ReactElement<{ visible?: boolean }>,
+            { visible }
+          )
           : child
       )}
     </motion.div>
@@ -218,9 +218,9 @@ export const NavbarButton = ({
   className?: string;
   variant?: "primary" | "secondary" | "dark" | "gradient";
 } & (
-  | React.ComponentPropsWithoutRef<"a">
-  | React.ComponentPropsWithoutRef<"button">
-)) => {
+    | React.ComponentPropsWithoutRef<"a">
+    | React.ComponentPropsWithoutRef<"button">
+  )) => {
   const base =
     "px-4 py-1.5 rounded-full text-sm font-medium relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
@@ -232,13 +232,16 @@ export const NavbarButton = ({
       "bg-gradient-to-b from-purple-500 to-purple-700 text-white shadow-md",
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Component = Tag as any;
+
   return (
-    <Tag
+    <Component
       href={href || undefined}
       className={cn(base, variants[variant], className)}
       {...props}
     >
       {children}
-    </Tag>
+    </Component>
   );
 };
